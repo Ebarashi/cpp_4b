@@ -1,18 +1,26 @@
 #pragma once
 #include "Player.hpp"
+#include "Captain.hpp"
+
+using namespace std;
 
 namespace coup {
 
-    class Ambassador : public Player {
-    public:
-        Ambassador(Game &currGame, const std::string& name);
+    class Ambassador : public Player 
+    {
+    
+        public:
+            Ambassador(Game &currGame, const string& name);
 
-        void transfer(const Player &firstPlayer, const Player &secondPlayer);
+            void transfer(Player &firstPlayer, Player &secondPlayer);
 
-        void block(const Player &otherPlayer);
-         
-        void coup(Player &p) override;
+            static void block(Player &otherPlayer);
+            
+            static void block(Captain &otherCaptain); 
 
-        std::string role() const override;
+            
+            //void coup(Player &p) override;
+
+            string role() const override;
     };
 }

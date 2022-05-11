@@ -18,11 +18,12 @@ namespace coup {
     }
 
     void Duke::block(Player &otherPlayer) {
-        if ((otherPlayer.canBlock()))
+        if (otherPlayer.lastaction == "foreign_aid")
         {
             otherPlayer.coin -=2;
         }
-        else{
+        else
+        {
             throw invalid_argument("can't block this action");  
         }
 

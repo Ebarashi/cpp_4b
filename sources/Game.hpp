@@ -7,7 +7,7 @@
 using namespace std;
 namespace coup 
 {
-
+    class Player;
     class Game 
     {
 
@@ -15,13 +15,13 @@ namespace coup
        
     public:
 
-        vector<Player *> currPlayers;
+        vector<Player*> currPlayers;
         unsigned int curr_player = 0;
         
         Game();
-        ~Game(){};
+        ~Game();
 
-        bool start;
+        unsigned int start;
 
         vector<string> players() ;
 

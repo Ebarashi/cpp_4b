@@ -4,8 +4,8 @@
 namespace coup
 {
 
-    int minimum = 2;
-    int maximum = 6;
+    const int minimum = 2;
+    const int maximum = 6;
 
     Game::Game()
     {

@@ -1,4 +1,6 @@
 #include "Ambassador.hpp"
+#include <stdexcept>
+
 
 namespace coup {
 
@@ -6,17 +8,41 @@ namespace coup {
 
     }
 
-    void Ambassador::block(const Player &otherPlayer) {
+    void Ambassador::block(Player &otherPlayer) 
+    {
+        throw invalid_argument("ambassador can only block captain");  
 
     }
 
-    void Ambassador::transfer(const Player &firstPlayer, const Player &secondPlayer) {
-
+    void Ambassador::block(Captain &otherCaptain) 
+    {
+        if (otherCaptain.lastaction == "steal")
+        {
+            otherCaptain.coin -= 2;
+            otherCaptain.stolen_p->coin +=2;
+        }
+        else
+        {
+            throw invalid_argument("you can't block this action");  
+        }
     }
 
-    void Ambassador::coup(Player &p){
+    void Ambassador::transfer(Player &firstPlayer, Player &secondPlayer) {
+        myTurn();
+        if (firstPlayer.coin <= 0)
+        {
+            throw runtime_error("player1 don't have enough coins");
+        }
+        firstPlayer.coin--;
+        secondPlayer.coin++;
+        this->lastaction = "transfer";
+        this->game->nexturn();
+    }
+
+
+    // void Ambassador::coup(Player &p){
    
-    }
+    // }
 
     std::string Ambassador::role() const {
         return "Ambassador";

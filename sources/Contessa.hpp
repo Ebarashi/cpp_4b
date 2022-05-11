@@ -1,18 +1,25 @@
 #pragma once
 #include "Player.hpp"
+#include "Assassin.hpp"
 
-namespace coup {
+using namespace std;
+namespace coup 
+{
 
     class Contessa : public Player 
     {
 
     public:
-        Contessa(Game &currGame, const std::string &name);
+        Contessa(Game &currGame, const string &name);
+        
+        ~Contessa();
 
-        void block(Player &otherPlayer);
+        static void block(Player &otherPlayer);
 
-        void coup(Player &p) override;
+        static void block(Assassin &assassin);
 
-        std::string role() const override;
+        //void coup(Player &p) override;
+
+        string role() const override;
     };
 }

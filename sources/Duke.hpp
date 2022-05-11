@@ -14,7 +14,7 @@ namespace coup
 
         void tax();
 
-        void block(Player &otherPlayer);
+        static void block(Player &otherPlayer);
 
         string role() const override;
 

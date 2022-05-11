@@ -5,28 +5,33 @@
 using namespace std;
 namespace coup
 {
-    int maxcoins = 10;
-    int couprice  = 7;
-    int maxplayers = 6;
+    const int maxcoins = 10;
+    const int couprice  = 7;
+    const int maxplayers = 6;
 
     Player::Player(Game &game, const string &name)
     {
         this->name = name;
         this->game = &game;
         this->coin = 0;
-        this->lastaction;
         this->alive = true;
+        
+        if (this->game->start == 1)
+        {
+            throw runtime_error("the game already started");
+        }
         
         if (this->game->players().size() == maxplayers)
         {
             throw runtime_error("too many players");
         }
+
         this->game->addPlayer(this);
     }
-    
-    Player::~Player() {}
 
-    bool Player::myTurn()
+     Player::~Player(){}
+    
+    void Player::myTurn()
     {
         if (game->players().size() < 2)
         {
@@ -35,6 +40,7 @@ namespace coup
         int ans = this->name.compare(game->turn());
         if (ans != 0)
         {
+
             throw runtime_error(this->name + " is not your turn!");
         }
         
@@ -49,7 +55,7 @@ namespace coup
         this->coin++;
         this->lastaction = "income";
         game->nexturn();
-        }
+    }
     
     void Player::foreign_aid()
     {
@@ -89,17 +95,5 @@ namespace coup
         return this->coin;
     }
     
-    bool Player::canBlock()
-    {
-        int ans  = lastaction.compare("foreign_aid");
-        if(ans == 0)
-        {
-            return true;
-
-        }
-        else{
-            return false;
-        }
-    }
 
 }

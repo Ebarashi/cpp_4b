@@ -1,20 +1,35 @@
 #pragma once
 #include "Player.hpp"
 
+using namespace std;
 namespace coup {
 
-    class Captain : public Player {
+    class Captain : public Player 
+    {
 
-    public:
-        Captain(Game &currGame, const std::string& name);
+        private:
+            bool steal0 = false;
+            bool steal1 = false;
+            bool steal2 = false;
 
-        void steal(Player &otherPlayer);
+        public:
 
-        void block(Player &otherPlayer);
+            Player *stolen_p = NULL; 
 
-        void coup(Player &p) override;
+            Captain(Game &currGame, const string& name);
 
-        std::string role() const override;
+            ~Captain();
+            
+            void steal(Player &otherPlayer);
+
+            static void block(Player &otherPlayer);
+            
+            static void block(Captain &otherCaptain);
+
+
+            //void coup(Player &p) override;
+
+            string role() const override;
 
     };
 }

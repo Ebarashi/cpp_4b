@@ -1,4 +1,5 @@
 #include "Contessa.hpp"
+#include <stdexcept>
 
 namespace coup {
 
@@ -6,13 +7,29 @@ namespace coup {
 
     }
 
+    Contessa::~Contessa(){}
+
     void Contessa::block(Player &otherPlayer) {
 
+        throw invalid_argument("the player need to be assassin");  
+
     }
 
-    void Contessa::coup(Player &p){
-   
+    void Contessa::block(Assassin &assassin) 
+    {
+        if ((assassin.lastaction.compare("kill")) == 0)
+        {
+            assassin.killed->alive = true;
+        }
+        else{
+            throw invalid_argument("can't block this action");  
+        }
+
     }
+
+    // void Contessa::coup(Player &p){
+   
+    // }
 
     std::string Contessa::role() const {
         return "Contessa";
