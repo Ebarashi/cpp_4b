@@ -2,25 +2,29 @@
 #include "Game.hpp"
 #include "string"
 
+using namespace std;
 namespace coup {
 
     class Player {
 
-    private:
-        std::string name;
-
 
     protected:
-        std::string p_role;
-        int coin;
+        Game *game;
+        string p_role;
     
     public:
-        Player(Game g, const std::string& name);
+        string name;
+        int coin;
+        string lastaction;
+        bool alive;
+        bool myTurn();
+        Player(Game &game, const string &name);
         void income();
         void foreign_aid();
-        int coins();
+        bool canBlock();
+        int coins() const;
         virtual void coup(Player &p);  
-        virtual std::string role() const;
+        virtual string role() const;
 
        
     }; 

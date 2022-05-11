@@ -1,9 +1,13 @@
 #pragma once
 #include "vector"
 #include "string"
+#include "Player.hpp"
 
+
+using namespace std;
 namespace coup 
 {
+
     class Game 
     {
 
@@ -11,18 +15,23 @@ namespace coup
        
     public:
 
-        std::vector<std::string> currPlayers;
-        unsigned int currPlayer = 0;
+        vector<Player *> currPlayers;
+        unsigned int curr_player = 0;
         
         Game();
+        ~Game(){};
 
-        std::vector<std::string> players() const;
+        bool start;
 
-        std::string turn();
+        vector<string> players() ;
 
-        std::string winner();
+        string turn();
 
-        void addPlayer(const std::string& name);
+        string winner();
+
+        void addPlayer(Player *p);
+
+        void nexturn();
 
     };
 }

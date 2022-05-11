@@ -1,32 +1,74 @@
 #include "Game.hpp"
-#include "vector"
+#include <stdexcept>
 
-namespace coup {
+namespace coup
+{
 
+    int minimum = 2;
+    int maximum = 6;
 
-    Game::Game() {
-        this->currPlayer = 0;
+    Game::Game()
+    {
+        this->curr_player = 0;
+        this->start = 0;
     }
 
-    std::string Game::turn() {
-      if (this->currPlayers.size() == 0)
+    Game::~Game(){}
+
+    vector<string> Game::players()
+    {
+        vector<string> names;
+        for(Player *p : currPlayers)
         {
-            return "exception";
+            if (p->alive)
+            {
+                names.push_back(p->name);
+            }  
         }
-        currPlayer = currPlayer % currPlayers.size();
-        return this->currPlayers[this->currPlayer];
+        return names;
     }
 
+    void Game::addPlayer(Player *p){
+        this->currPlayers.push_back(p);
 
-    std::vector<std::string> Game::players() const {
-        return this->currPlayers;
     }
 
-    void Game::addPlayer(const std::string &name) {
+    string Game::turn()
+    {
+        if (this->currPlayers.empty())
+        {
+            throw runtime_error("none players in this game");
+        }
+        return this->currPlayers[curr_player]->name;
     }
 
-    std::string Game::winner() {
-        return this->currPlayers[0];
+    void Game::nexturn(){ 
+        do
+        {
+            curr_player = (this->curr_player+1) % this->currPlayers.size();
+        } while (!this->currPlayers.at(curr_player)->alive);
+        if (currPlayers.size() < minimum || currPlayers.size()> maximum )
+        {
+            throw runtime_error("too much players");
+        }
+        if (start == 0)
+        {
+            start = 1; 
+        }
+    }
+    
+    string Game::winner()
+    {
+        if (this->players().size() != 1)
+        {
+            throw runtime_error("the winner hasn't been yet determined");
+        }
+        if (this->start == 0)
+        {
+            throw runtime_error("the game has not started yet");
+        }
+        return this->players().at(0);
     }
 
+ 
 }

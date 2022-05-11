@@ -1,28 +1,40 @@
 #include "Duke.hpp"
 #include "Game.hpp"
 #include "Player.hpp"
-#include "string"
+#include <stdexcept>
+
 
 namespace coup {
 
-    Duke::Duke(Game &currGame, const std::string &name) : Player{currGame, name} {
+   Duke::Duke(Game &currGame, const string &name) : Player(currGame, name){}
 
-    }
+     Duke::~Duke(){}
 
     void Duke::tax() {
+        myTurn();
         this->coin += 3;
+        lastaction = "tax";
+        this->game->nexturn();
     }
 
     void Duke::block(Player &otherPlayer) {
+        if ((otherPlayer.canBlock()))
+        {
+            otherPlayer.coin -=2;
+        }
+        else{
+            throw invalid_argument("can't block this action");  
+        }
 
     }
 
-    void Duke::coup(Player &p){
+    // void Duke::coup(Player &p){
     
-    }
+    // }
 
-    std::string Duke::role() const {
+    string Duke::role() const {
         return "Duke";
     }
 
 }
+
