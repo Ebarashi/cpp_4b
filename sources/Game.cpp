@@ -46,11 +46,14 @@ namespace coup
         do
         {
             curr_player = (this->curr_player+1) % this->currPlayers.size();
-        } while (!this->currPlayers.at(curr_player)->alive);
+        } 
+        while (!this->currPlayers.at(curr_player)->alive);
+        
         if (currPlayers.size() < minimum || currPlayers.size()> maximum )
         {
             throw runtime_error("too much players");
         }
+        
         if (start == 0)
         {
             start = 1; 

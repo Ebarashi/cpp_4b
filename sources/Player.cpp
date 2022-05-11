@@ -18,7 +18,7 @@ namespace coup
         
         if (this->game->start == 1)
         {
-            throw runtime_error("the game already started");
+            throw runtime_error("the game has been started");
         }
         
         if (this->game->players().size() == maxplayers)
@@ -29,7 +29,7 @@ namespace coup
         this->game->addPlayer(this);
     }
 
-     Player::~Player(){}
+    Player::~Player(){}
     
     void Player::myTurn()
     {
@@ -45,6 +45,12 @@ namespace coup
         }
         
     }
+
+    int Player::coins() const
+    {
+        return this->coin;
+    }
+
     void Player::income()
     {
         if (coin > maxcoins)
@@ -90,10 +96,7 @@ namespace coup
         return "Player";
     }
 
-    int Player::coins() const
-    {
-        return this->coin;
-    }
+   
     
 
 }
